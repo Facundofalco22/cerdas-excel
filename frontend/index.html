@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro de cerdas - El Fortín</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header><h1>Registro de cerdas · El Fortín</h1></header>
+  <main>
+
+    <section class="caja">
+      <h2>Excel de trabajo</h2>
+      <p id="estado-excel" class="chico">Consultando...</p>
+      <label class="boton" for="archivo-excel">Cargar Excel completo (.xlsx)</label>
+      <input id="archivo-excel" type="file" accept=".xlsx" hidden>
+      <a id="btn-descargar" class="boton verde" href="/api/descargar">⬇ Descargar Excel actualizado</a>
+      <button id="btn-reiniciar" class="secundario">Volver a la planilla original</button>
+      <p id="msg-excel" class="chico"></p>
+    </section>
+
+    <section class="caja">
+      <h2>Buscar cerda</h2>
+      <div class="fila-busqueda">
+        <input id="buscar-nro" type="number" placeholder="Nº de cerda (ej. 1998)">
+        <button id="btn-buscar">Buscar</button>
+      </div>
+      <div id="resultado-busqueda"></div>
+    </section>
+
+    <section class="caja">
+      <h2>Cargar fotos</h2>
+      <label id="zona" for="fotos">
+        <span>Arrastrá las fotos acá o hacé clic para elegirlas</span>
+        <input id="fotos" type="file" accept="image/*" multiple hidden>
+      </label>
+      <p id="lista-fotos" class="chico"></p>
+      <p class="chico">Giro de la foto:
+        <select id="giro">
+          <option value="auto">Automático (la endereza sola)</option>
+          <option value="90">Girar 90° a la izquierda</option>
+          <option value="270">Girar 90° a la derecha</option>
+          <option value="180">Dar vuelta (180°)</option>
+          <option value="0">No girar</option>
+        </select>
+      </p>
+      <button id="btn-leer" disabled>Leer fotos</button>
+      <p id="estado" class="chico"></p>
+    </section>
+
+    <section class="caja" id="revision" hidden>
+      <h2>Revisá y corregí</h2>
+      <p class="chico">Las filas con fondo amarillo tienen datos dudosos. 🟩 = la cerda no gestó (se guarda solo servicio y padrillo).</p>
+      <p class="explicacion">
+        <b>¿Por qué una fila sale en amarillo?</b> Porque el sistema no está seguro de haber leído bien
+        algún dato de esa fila: la letra no se entiende bien, un número o una fecha quedó dudoso, o una
+        fecha no tiene un formato válido. El motivo aparece en la columna <b>Nota</b>.
+        Compará esa fila con la foto y corregí lo que haga falta antes de guardar.
+        Si la fecha tiene el borde rojo, está incompleta o no existe (por ejemplo 31/02/2026).
+      </p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Cerda</th><th>Fecha servicio</th><th>Padrillo</th><th>Parición probable</th>
+              <th>Fecha parto</th><th>Vivos</th><th>Totales</th><th>Fecha destete</th>
+              <th>Destetados</th><th>🟩 No gestó</th><th>Nota</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="filas"></tbody>
+        </table>
+      </div>
+      <button id="btn-agregar" class="secundario">+ Agregar fila</button>
+      <h2>Guardar</h2>
+      <button id="btn-guardar">Confirmar y guardar en el Excel</button>
+      <ul id="errores"></ul>
+    </section>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+uploads/temporal/*
+exel/salida/
+exel/planilla.xlsx
